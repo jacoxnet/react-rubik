@@ -19,6 +19,8 @@ export const SLICE = {
     'B': [ "BLD", "BD", "BRD", "BR", "BRU", "BU", "BLU", "BL", "B" ]
 }
 
+export const ALL_CUBIES = [].concat(SLICE['F']).concat(SLICE['S']).concat(SLICE['B']);
+
 // Visible faces
 export const VISFACES = ['F', 'B', 'L', 'R', 'U', 'D'];
 

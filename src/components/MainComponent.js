@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from './CubeComponent';
+import { ALL_CUBIES, INITIAL_COLORS, ROT_AXIS } from '../shared/constants';
+import Cube from './CubeComponent';
 
 class Main extends Component {
-    
-    render() {
-        const HomePage = () => {
-            return(
-                <Home />
-            );
+    constructor(props) {
+        super(props);
+        this.state = {
+            allCubies: ALL_CUBIES,
+            rotAxis: ROT_AXIS,
+            initialColors: INITIAL_COLORS
         }
 
+    }
+    
+    render() {
         return(
-            <div>
-                <Routes>
-                    <Route path="/home" element={ HomePage } />
-                    <Route path="*" element={ HomePage } />
-                </Routes>
-            </div>
+            <Cube allCubies={this.state.allCubies} rotAxis={this.state.rotAxis} initialColors={this.state.initialColors} />
         );
     }
 }

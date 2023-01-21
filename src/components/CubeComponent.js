@@ -1,41 +1,48 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class CubeComponent extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            wholeCube: null,
-            allCubies: null,
-            pieces: null,
-            scene: null,
-            pivot: null
-        }
-    }
+function Piece ({pieceId, name, initialColors, rotAxis }) {
+    const transphrase = name.split("").map((face) => {
+        return "translate" + (rotAxis[face])[0] + "(" + (rotAxis[face])[1] + "2em) ";
+    });
+    const elems = name.split("").map((face) => {
+        return(
+            <div className={`element ${face}`}>
+                <div className={`sticker ${initialColors[face]}`}>
+                </div>
+            </div>
+        )
+    })
+    return(
+        <div key={pieceId} className="piece" id={name} style={{transform: `rotateX(0deg) ${transphrase.join(" ")}` }}>
+            {elems}
+        </div>
+    );
+}
 
-    assembleCube() {
-    for (let cubieIndex = 0; cubieIndex < 26; cubieIndex++)
-    {
-        // set id of piece to be facename (eg 'FRU')
-        pieces[cubieIndex].setAttribute('id', allCubies[cubieIndex]);
-        // initialize translation phrase to add to cubie style
-        let translate = '';
-        // cycle through each letter of facename
-        for (let face = 0; face < allCubies[cubieIndex].length; face++)
-        {
-            // set color of face
-            pieces[cubieIndex].querySelector('.element.' + allCubies[cubieIndex][face])
-                .appendChild(document.createElement('div'))
-                .setAttribute('class', 'sticker ' + initialColors[allCubies[cubieIndex][face]]);
-            // set proper xyz translation for cubie based on faces
-            translate = translate + 'translate' + rotAxis[allCubies[cubieIndex][face]][0] + 
-                '(' + rotAxis[allCubies[cubieIndex][face]][1] + '2em) ';
-        }
-        // form translation move - rotate 0 is in there for
-        // replacement in move function
-        pieces[cubieIndex].style.transform = 'rotateX(0deg) ' + translate;
-    }
-    // place logo
-    let logoSticker = document.querySelector('#U>.element.U').firstChild;
-    logoSticker.className += ' logo';
+    
+function Cube(props) {
+    const pieces = props.allCubies.map((piece, index) => {
+        return(
+            <Piece pieceId={index} name={piece} initialColors={props.initialColors} 
+                   rotAxis={props.rotAxis} />
+        );
+    });
+    
+    return(
+        <div className="container" id="cubefield">
+            <div className="row h-100 justify-content-center">
+                <div className="col-12">
+                    <div className="scene" id="scene">
+                        <div className="pivot centered" id="pivot" style={{transform: "rotateX(-35deg) rotateY(-45deg)"}}>
+                            <div className="cube" id="cube">
+                                {pieces}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
-}
+
+export default Cube;
