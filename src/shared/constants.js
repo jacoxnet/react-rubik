@@ -19,7 +19,35 @@ export const SLICE = {
     'B': [ "BLD", "BD", "BRD", "BR", "BRU", "BU", "BLU", "BL", "B" ]
 }
 
-export const ALL_CUBIES = [].concat(SLICE['F']).concat(SLICE['S']).concat(SLICE['B']);
+export const ALL_CUBIES = [ {id: 0, name:"FLU"}, 
+                            {id: 1, name:"FU"}, 
+                            {id: 2, name:"FRU"}, 
+                            {id: 3, name:"FR"}, 
+                            {id: 4, name:"FRD"}, 
+                            {id: 5, name:"FD"}, 
+                            {id: 6, name:"FLD"}, 
+                            {id: 7, name:"FL"}, 
+                            {id: 8, name:"F"}, 
+                            {id: 9, name:"LU"}, 
+                            {id: 10, name:"U"}, 
+                            {id: 11, name:"RU"}, 
+                            {id: 12, name:"R"}, 
+                            {id: 13, name:"RD"}, 
+                            {id: 14, name:"D"}, 
+                            {id: 15, name:"LD"}, 
+                            {id: 16, name:"L"}, 
+                            {id: 17, name:"BLD"}, 
+                            {id: 18, name:"BD"}, 
+                            {id: 19, name:"BRD"}, 
+                            {id: 20, name:"BR"}, 
+                            {id: 21, name:"BRU"}, 
+                            {id: 22, name:"BU"}, 
+                            {id: 23, name:"BLU"}, 
+                            {id: 24, name:"BL"}, 
+                            {id: 25, name:"B"}
+];
+
+//export const ALL_CUBIES = [].concat(SLICE['F']).concat(SLICE['S']).concat(SLICE['B']);
 
 // Visible faces
 export const VISFACES = ['F', 'B', 'L', 'R', 'U', 'D'];
@@ -69,8 +97,11 @@ export const TRANSITION = {
 }
 
 // initial colors of cube by face
+// export const INITIAL_COLORS = {'F': 'red', 'B': 'orange', 'L': 'blue', 'R': 'green', 
+    // 'U': 'yellow', 'D': 'white'};
+
 export const INITIAL_COLORS = {'F': 'red', 'B': 'orange', 'L': 'blue', 'R': 'green', 
-    'U': 'yellow', 'D': 'white'};
+                               'U': 'yellow', 'D': 'white'};
 
 export const COLOR_WHEEL = ['red', 'orange', 'blue', 'green', 'yellow', 'white'];
 
