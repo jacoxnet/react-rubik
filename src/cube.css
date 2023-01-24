@@ -1,5 +1,5 @@
 #cubefield {
-    height: 500px;
+    height: 800px;
     overflow: hidden;
     background: radial-gradient(circle, white, rgba(0, 0, 0, 0.5));
     background-color: #2f2f31;
@@ -50,8 +50,8 @@
 }
 
 .cube > .piece {
-    width: 1.9em;
-    height: 1.9em;    
+    width: 2.9em;
+    height: 2.9em;    
 }
 
 .cube > .piece > .element {
@@ -64,22 +64,22 @@
 }
 
 .cube > .piece > .element.L {
-    transform: rotateX(0deg) rotateY(-90deg) rotateZ(180deg) translateZ(1em);
+    transform: rotateX(0deg) rotateY(-90deg) rotateZ(180deg) translateZ(1.5em);
 }
 .cube > .piece > .element.R {
-    transform: rotateX(0deg) rotateY(90deg) rotateZ(90deg) translateZ(1em);
+    transform: rotateX(0deg) rotateY(90deg) rotateZ(90deg) translateZ(1.5em);
 }
 .cube > .piece > .element.B {
-    transform: rotateX(0deg) rotateY(180deg) rotateZ(-90deg) translateZ(1em);
+    transform: rotateX(0deg) rotateY(180deg) rotateZ(-90deg) translateZ(1.5em);
 }
 .cube > .piece > .element.F {
-    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateZ(1em);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateZ(1.5em);
 }
 .cube > .piece > .element.D {
-    transform: rotateX(-90deg) rotateY(0deg) rotateZ(-90deg) translateZ(1em);
+    transform: rotateX(-90deg) rotateY(0deg) rotateZ(-90deg) translateZ(1.5em);
 }
 .cube > .piece > .element.U {
-    transform: rotateX(90deg) rotateY(0deg) rotateZ(180deg) translateZ(1em);
+    transform: rotateX(90deg) rotateY(0deg) rotateZ(180deg) translateZ(1.5em);
 }
 
 .cube > .piece > .element > .sticker {

@@ -1,8 +1,9 @@
 import React from 'react';
+import { ROT_AXIS } from '../shared/constants';
 
-function Piece ({name, cubieColors, rotAxis }) {
+function Piece({name, cubieColors }) {
     const transphrase = name.split("").map((face) => {
-        return "translate" + (rotAxis[face])[0] + "(" + (rotAxis[face])[1] + "2em) ";
+        return "translate" + (ROT_AXIS[face])[0] + "(" + (ROT_AXIS[face])[1] + "3em) ";
     });
     const elems = name.split("").map((face, index) => {
         return(
@@ -19,21 +20,4 @@ function Piece ({name, cubieColors, rotAxis }) {
     );
 }
 
-    
-function Cube(props) {
-
-    const pieces = (props.allCubieColors).map((piece) => {
-        return(
-            <Piece key={piece.id} name={piece.name} cubieColors={piece.colors} 
-                   rotAxis={props.rotAxis} />
-        );
-    });
-    
-    return(
-        <div className="cube" id="cube">
-            {pieces}
-        </div>
-    );
-}
-
-export default Cube;
+export default Piece;
