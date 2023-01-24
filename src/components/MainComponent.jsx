@@ -27,6 +27,14 @@ class Main extends Component {
         return(
             <div>
                 <Cube currentCube={this.state.currentCube} />
+                <div className="text-center">
+                    <h3>Instructions:</h3>
+                    <p>Press one of these keys to move a slice of the cube:
+                        l  m  r  u  e  d  f  s  b</p>
+                    <p>Press one of these keys to rotate the entire cube:
+                        x  y  z</p>
+                    <p>hold down SHIFT for reverse movements</p>
+                </div>
             </div>          
         );
     }
