@@ -56,7 +56,7 @@ class Cube extends Component {
         };
         // initiate animation
         requestAnimationFrame(rotateCubies);
-}
+    }
 
     render () {    
         // pieces collects each piece and places in list
