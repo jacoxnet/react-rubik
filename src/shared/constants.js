@@ -3,11 +3,11 @@ export const MOVEMENTS = ['L', 'M', 'R', 'U', 'E', 'D', 'F', 'S', 'B'];
 export const CCMOVEMENTS = ['l', 'm', 'r', 'u', 'e', 'd', 'f', 's', 'b'];
 export const ROTATIONS = ['X', 'Y', 'Z', 'x', 'y', 'z'];
 export const ROTATION_EQUIV = {'x': 'rLM', 'X': 'Rlm', 'y': 'uED', 'Y': 'Ued',
-                      'z': 'fsB', 'Z':'FSb'};
+                      'z': 'fsB', 'Z':'FSb'}; 
 
 // arrays of slices of the cube
 // each array needs to be in order of clockwise movement
-export const SLICE = {
+export const CUBE_SLICE = {
     'L': [ "FLU", "FL", "FLD", "LD", "BLD", "BL", "BLU", "LU", "L" ],
     'M': [ "FU", "F", "FD", "D", "BD", "B", "BU", "U" ],
     'R': ["FRD", "FR", "FRU", "RU", "BRU", "BR", "BRD", "RD", "R" ],
@@ -19,35 +19,8 @@ export const SLICE = {
     'B': [ "BLD", "BD", "BRD", "BR", "BRU", "BU", "BLU", "BL", "B" ]
 }
 
-export const ALL_CUBIES = [ {id: 0, name:"FLU"}, 
-                            {id: 1, name:"FU"}, 
-                            {id: 2, name:"FRU"}, 
-                            {id: 3, name:"FR"}, 
-                            {id: 4, name:"FRD"}, 
-                            {id: 5, name:"FD"}, 
-                            {id: 6, name:"FLD"}, 
-                            {id: 7, name:"FL"}, 
-                            {id: 8, name:"F"}, 
-                            {id: 9, name:"LU"}, 
-                            {id: 10, name:"U"}, 
-                            {id: 11, name:"RU"}, 
-                            {id: 12, name:"R"}, 
-                            {id: 13, name:"RD"}, 
-                            {id: 14, name:"D"}, 
-                            {id: 15, name:"LD"}, 
-                            {id: 16, name:"L"}, 
-                            {id: 17, name:"BLD"}, 
-                            {id: 18, name:"BD"}, 
-                            {id: 19, name:"BRD"}, 
-                            {id: 20, name:"BR"}, 
-                            {id: 21, name:"BRU"}, 
-                            {id: 22, name:"BU"}, 
-                            {id: 23, name:"BLU"}, 
-                            {id: 24, name:"BL"}, 
-                            {id: 25, name:"B"}
-];
-
-//export const ALL_CUBIES = [].concat(SLICE['F']).concat(SLICE['S']).concat(SLICE['B']);
+// These three slices are sufficient for whole cube in order
+export const ALL_CUBIES = [].concat(CUBE_SLICE['F']).concat(CUBE_SLICE['S']).concat(CUBE_SLICE['B']);
 
 // Visible faces
 export const VISFACES = ['F', 'B', 'L', 'R', 'U', 'D'];

@@ -8,7 +8,7 @@ function Piece({name, cubieColors }) {
     const elems = name.split("").map((face, index) => {
         return(
             <div className={`element ${face}`} key={index}>
-                <div className={`sticker ${cubieColors[index]}`}>
+                <div className={`sticker ${cubieColors[face]}`}>
                 </div>
             </div>
         )
