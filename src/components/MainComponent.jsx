@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ALL_CUBIES, INITIAL_COLORS, CUBE_SLICE, TRANSITION } from '../shared/constants';
+import { ALL_CUBIE_NAMES, NUM_FACES, INITIAL_COLORS } from '../shared/constants';
 import Cube from './CubeComponent';
 
 class Main extends Component {
@@ -8,6 +8,7 @@ class Main extends Component {
         // create a ref to store cube DOM element
         this.cubeRef = React.createRef();
         this.state = {
+            allFaces: NUM_FACES.map((face, )
             // currentCube is an object like this 
             // {id: 1, name: "FRU", colors: ["red, "yellow", "green"], ... }
             // meaning F is currently red, R is yellow, and U is green
