@@ -1,16 +1,3 @@
-export const NUM_FACES = 54;
-export const ALL_CUBIE_NAMES = [
-    "FLU", "FU", "FRU", "FR", "FRD", "FD", "FLD", "FL", "F",
-    "LU", "U", "RU", "R", "RD", "D", "LD", "L",
-    "BLD", "BD", "BRD", "BR", "BRU", "BU", "BLU", "BL", "B"
-]
-export const NUM_CUBIES = ALL_CUBIE_NAMES.length;
-export const INITIAL_COLORS = {'F': 'red', 'B': 'orange', 'L': 'blue', 'R': 'green', 
-                               'U': 'yellow', 'D': 'white'};
-
-
-
-
 // cube movements defined here
 export const MOVEMENTS = ['L', 'M', 'R', 'U', 'E', 'D', 'F', 'S', 'B'];
 export const CCMOVEMENTS = ['l', 'm', 'r', 'u', 'e', 'd', 'f', 's', 'b'];
@@ -32,6 +19,8 @@ export const CUBE_SLICE = {
     'B': [ "BLD", "BD", "BRD", "BR", "BRU", "BU", "BLU", "BL", "B" ]
 }
 
+// These three slices are sufficient for whole cube in order
+export const ALL_CUBIES = [].concat(CUBE_SLICE['F']).concat(CUBE_SLICE['S']).concat(CUBE_SLICE['B']);
 
 // Visible faces
 export const VISFACES = ['F', 'B', 'L', 'R', 'U', 'D'];
@@ -80,8 +69,12 @@ export const TRANSITION = {
     'B': {'B': 'B', 'R': 'U', 'U': 'L', 'L': 'D', 'D': 'R'}
 }
 
+// initial colors of cube by face
+// export const INITIAL_COLORS = {'F': 'red', 'B': 'orange', 'L': 'blue', 'R': 'green', 
+    // 'U': 'yellow', 'D': 'white'};
 
-
+export const INITIAL_COLORS = {'F': 'red', 'B': 'orange', 'L': 'blue', 'R': 'green', 
+                               'U': 'yellow', 'D': 'white'};
 
 export const COLOR_WHEEL = ['red', 'orange', 'blue', 'green', 'yellow', 'white'];
 

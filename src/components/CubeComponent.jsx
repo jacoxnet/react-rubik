@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Piece from './PieceComponent';
-import { CUBE_SLICE, ROT_AXIS, MOVEMENTS, CCMOVEMENTS, 
+import { CUBE, MOVEMENTS, CCMOVEMENTS, 
          ROTATIONS, ROTATION_EQUIV} from '../shared/constants';
 
 
@@ -57,9 +57,13 @@ function Cube(props) {
         });
 
     // pieces collects each piece and places in list
-    const pieces = (props.currentCube).map((piece) => {
+    const pieces = CUBE.map((piece) => {
+        let colors = [];
+        piece.name.split("").forEach((letter) => {
+            colors.push(props.faceColors[piece[letter]]);
+        });
         return(
-            <Piece key={piece.id} name={piece.name} cubieColors={piece.colors} />
+            <Piece key={piece.id} name={piece.name} cubieColors={colors} />
         );
     });
     
