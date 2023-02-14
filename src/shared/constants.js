@@ -11,7 +11,7 @@ const INITIAL_COLORS = {
 // each array needs to be in order of clockwise movement
 const CUBE_SLICE = {
     'L': [ "FLU", "FL", "FLD", "LD", "BLD", "BL", "BLU", "LU", "L" ],
-    'M': [ "FU", "F", "FD", "D", "BD", "B", "BU", "U" ],
+    'M': [ "FU", "U", "BU", "B", "BD", "D", "FD", "F"],
     'R': ["FRD", "FR", "FRU", "RU", "BRU", "BR", "BRD", "RD", "R" ],
     'U': [ "FLU", "LU", "BLU", "BU", "BRU", "RU", "FRU", "FU", "U" ],
     'E': [ "FL", "F", "FR", "R", "BR", "B", "BL", "L" ],
@@ -83,16 +83,16 @@ const CAB_LIST = {
 // {id: 1, name: "FRU", "F":20, "R":27, "U":8}
 // where the numbers are cabezas cubie face numbers
 const CUBE = ALL_CUBIES.map((piece, pindex) => {
-    const returnVal = {id: pindex, name:normalizeName(piece)};
+    const returnVal = {id: pindex, name:piece};
     piece.split("").forEach((face, findex) => {
-        returnVal[face] = CAB_LIST[piece[findex]]
+        returnVal[face] = (CAB_LIST[piece])[findex]
     });
     return returnVal;
 });
 
 // cube movements defined here
-const MOVEMENTS = ['L', 'M', 'R', 'U', 'E', 'D', 'F', 'S', 'B'];
-const CCMOVEMENTS = ['l', 'm', 'r', 'u', 'e', 'd', 'f', 's', 'b'];
+const MOVEMENTS = ['l', 'm', 'r', 'u', 'e', 'd', 'f', 's', 'b'];
+const CCMOVEMENTS = ['L', 'M', 'R', 'U', 'E', 'D', 'F', 'S', 'B'];
 const ROTATIONS = ['X', 'Y', 'Z', 'x', 'y', 'z'];
 const ROTATION_EQUIV = {'x': 'rLM', 'X': 'Rlm', 'y': 'uED', 'Y': 'Ued',
                       'z': 'fsB', 'Z':'FSb'}; 

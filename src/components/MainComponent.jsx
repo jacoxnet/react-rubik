@@ -20,6 +20,7 @@ class Main extends Component {
     // to actually rotate the face (direction 1 normal -1 anti)
     // rotation is done by swapping colors in every second cube
     rotateColors = (rotFace, direction) => {
+        console.log(`CUBE ${JSON.stringify(CUBE)}`);
         console.log(`state before: ${this.state.faceColors}`);
         // determine transition map
         var transMap = TRANSITION[rotFace];
@@ -39,7 +40,7 @@ class Main extends Component {
         toRotate.forEach((piece, i) => {
             const oldCubieIndex = CUBE.findIndex((cubie) => piece === cubie.name);
             const newCubieIndex = CUBE.findIndex((cubie) => newCubies[i] === cubie.name);
-            console.log(`moving index ${oldCubieIndex} to ${newCubieIndex}`);
+            console.log(`moving index ${piece} (${oldCubieIndex}) to ${newCubies[i]}(${newCubieIndex})`);
             // for each (face) letter, assign the old state color to the new face
             piece.split("").forEach((letter) => {
                 console.log(`${transMap[letter]} transmap old color  ${this.state.faceColors[CUBE[newCubieIndex][transMap[letter]]]}`);
