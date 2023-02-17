@@ -26,7 +26,7 @@ class Main extends Component {
             const toRotate = CUBE_SLICE[rotFace].slice();
             // create list of corresponding new cubie names
             const newCubies = toRotate.map((cubieName) =>
-                normalizeName((cubieName.split("").map((letter) => transMap[letter])).join("")));
+                normalizeName(([...cubieName].map((letter) => transMap[letter])).join("")));
             // create copy of state for new color assignment
             const newState = oldState.faceColors.slice();
             // move colors 
@@ -34,7 +34,7 @@ class Main extends Component {
                 const oldCubieIndex = CUBE.findIndex((cubie) => piece === cubie.name);
                 const newCubieIndex = CUBE.findIndex((cubie) => newCubies[i] === cubie.name);
                 // for each (face) letter, assign the old state color to the new face
-                piece.split("").forEach((letter) => {
+                [...piece].forEach((letter) => {
                     newState[CUBE[newCubieIndex][transMap[letter]]] = 
                         oldState.faceColors[CUBE[oldCubieIndex][letter]];    
                 });

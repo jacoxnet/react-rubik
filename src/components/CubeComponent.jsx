@@ -40,7 +40,7 @@ function Cube(props) {
         } else if (CCMOVEMENTS.includes(move)) {
             quarterMove(move, -1);
         } else if (ROTATIONS.includes(move)) {
-            (ROTATION_EQUIV[move].split("")).forEach((submove) => 
+            ([...ROTATION_EQUIV[move]]).forEach((submove) => 
                 singleMove(submove));
         }
     }
@@ -62,7 +62,7 @@ function Cube(props) {
     // pieces collects each piece and places in list
     const pieces = CUBE.map((piece) => {
         let colors = [];
-        piece.name.split("").forEach((letter) => {
+        [...piece.name].forEach((letter) => {
             colors.push(props.faceColors[piece[letter]]);
         });
         return(
