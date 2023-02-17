@@ -94,39 +94,29 @@ const CUBE = ALL_CUBIES.map((piece, pindex) => {
 const MOVEMENTS = ['l', 'm', 'r', 'u', 'e', 'd', 'f', 's', 'b'];
 const CCMOVEMENTS = ['L', 'M', 'R', 'U', 'E', 'D', 'F', 'S', 'B'];
 const ROTATIONS = ['X', 'Y', 'Z', 'x', 'y', 'z'];
-const ROTATION_EQUIV = {'x': 'rLM', 'X': 'Rlm', 'y': 'uED', 'Y': 'Ued',
+const ROTATION_EQUIV = {'x': 'rML', 'X': 'Rml', 'y': 'uED', 'Y': 'Ued',
                       'z': 'fsB', 'Z':'FSb'}; 
 
+                      // rotation axes by face of cube (+ means clockwise, minus countercw)
+const ROT_AXIS = {'F': 'Z+', 'S': 'Z+', 'B': 'Z-', 'L': 'X-', 'M': 'X-', 'R': 'X+', 
+                  'U': 'Y-', 'E': 'Y+', 'D': 'Y+' };
 
 const FACE_TRANSITIONS = {
-    'X': {'L': 'L', 'F': 'D', 'D': 'B', 'B': 'U', 'U': 'F', 'R': 'R'},
+    'X': {'L': 'L', 'F': 'U', 'D': 'F', 'B': 'D', 'U': 'B', 'R': 'R'},
     'Y': {'D': 'D', 'F': 'R', 'R': 'B', 'B': 'L', 'L': 'F', 'U': 'U'},
-    'Z': {'F': 'F', 'L': 'U', 'U': 'R', 'R': 'D', 'D': 'L', 'B': 'B'},
-}
-    
+    'Z': {'F': 'F', 'L': 'U', 'U': 'R', 'R': 'D', 'D': 'L', 'B': 'B'} }
+
 // reverse the keys and values of a dict
 const reverseMap = (dict) => Object.fromEntries(Object.entries(dict).map(([k, v]) => [v, k]));
 
 // dictionary of quarter-turn clockwise transitions
-const TRANSITION = {
-    'F': FACE_TRANSITIONS['Z'],
-    'B': reverseMap(FACE_TRANSITIONS['Z']),
-    'S': FACE_TRANSITIONS['Z'],
-
-    'R': FACE_TRANSITIONS['X'],
-    'L': reverseMap(FACE_TRANSITIONS['X']),
-    'M': reverseMap(FACE_TRANSITIONS['X']),
-    
-    'D': FACE_TRANSITIONS['Y'],
-    'U': reverseMap(FACE_TRANSITIONS['Y']),
-    'E': FACE_TRANSITIONS['Y']
-}
+var TRANSITION = Object.fromEntries(Object.entries(ROT_AXIS).map(([k, v]) => {
+    if (v[1] === '+') return [k, FACE_TRANSITIONS[v[0]]];
+    // else v[1] must be '-'
+    return [k, reverseMap(FACE_TRANSITIONS[v[0]])];
+}));
     
 // const COLOR_WHEEL = ['red', 'orange', 'blue', 'green', 'yellow', 'white'];
-
-// rotation axes by face of cube (+ means clockwise, minus countercw)
-const ROT_AXIS = {'F': 'Z+', 'B': 'Z-', 'L': 'X-', 'R': 'X+', 'U': 'Y-', 'D': 'Y+',
-    'M': 'X-', 'E': 'Y+', 'S': 'Z+'};
 
 
 export { MOVEMENTS, CCMOVEMENTS, 

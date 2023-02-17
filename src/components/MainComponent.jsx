@@ -18,39 +18,30 @@ class Main extends Component {
 
     // rotate colors of the face by direction, performed after animation 
     // to actually rotate the face (direction 1 normal -1 anti)
-    // rotation is done by swapping colors in every second cube
     rotateColors = (rotFace, direction) => {
-        console.log(`CUBE ${JSON.stringify(CUBE)}`);
-        console.log(`state before: ${this.state.faceColors}`);
-        // determine transition map
-        var transMap = TRANSITION[rotFace];
-        // reverse map if opposite direction
-        if (direction === -1) 
-            transMap = reverseMap(transMap)
-        // create copy of state for new color assignment
-        const newState = this.state.faceColors.slice();
-        // create list of cubie names to rotate
-        const toRotate = CUBE_SLICE[rotFace].slice();
-        // create list of corresponding new cubie names
-        const newCubies = toRotate.map((cubieName) =>
-            normalizeName((cubieName.split("").map((letter) => transMap[letter])).join("")));
-        console.log(toRotate);
-        console.log(newCubies);
-        // move colors 
-        toRotate.forEach((piece, i) => {
-            const oldCubieIndex = CUBE.findIndex((cubie) => piece === cubie.name);
-            const newCubieIndex = CUBE.findIndex((cubie) => newCubies[i] === cubie.name);
-            console.log(`moving index ${piece} (${oldCubieIndex}) to ${newCubies[i]}(${newCubieIndex})`);
-            // for each (face) letter, assign the old state color to the new face
-            piece.split("").forEach((letter) => {
-                console.log(`${transMap[letter]} transmap old color  ${this.state.faceColors[CUBE[newCubieIndex][transMap[letter]]]}`);
-                console.log(`${letter} new color  ${this.state.faceColors[CUBE[oldCubieIndex][letter]]}`);
-                newState[CUBE[newCubieIndex][transMap[letter]]] = 
-                    this.state.faceColors[CUBE[oldCubieIndex][letter]];
+        // determine transition map direction
+        var transMap = (direction === 1)? TRANSITION[rotFace] : reverseMap(TRANSITION[rotFace]);            
+        this.setState((oldState) => {
+            // create list of cubie names to rotate
+            const toRotate = CUBE_SLICE[rotFace].slice();
+            // create list of corresponding new cubie names
+            const newCubies = toRotate.map((cubieName) =>
+                normalizeName((cubieName.split("").map((letter) => transMap[letter])).join("")));
+            // create copy of state for new color assignment
+            const newState = oldState.faceColors.slice();
+            // move colors 
+            toRotate.forEach((piece, i) => {
+                const oldCubieIndex = CUBE.findIndex((cubie) => piece === cubie.name);
+                const newCubieIndex = CUBE.findIndex((cubie) => newCubies[i] === cubie.name);
+                // for each (face) letter, assign the old state color to the new face
+                piece.split("").forEach((letter) => {
+                    newState[CUBE[newCubieIndex][transMap[letter]]] = 
+                        oldState.faceColors[CUBE[oldCubieIndex][letter]];    
+                });
             });
+            // console.log(`new state ${newState}`);
+            return {faceColors: newState}
         });
-        console.log(`newstate: ${newState}`);
-        this.setState({faceColors: newState});
     }
 
     render() {

@@ -24,9 +24,9 @@ function Cube(props) {
             if (elapsedTime <= 90) {
                 requestAnimationFrame(rotateCubies);
             } else {
-                props.rotateColorFunction(face, direction);
                 toMoveList.forEach(cubie => 
                     cubie.style.transform = cubie.style.transform.replace(/rotate.\(\S+\)/, 'rotateX(0deg)'));   
+                props.rotateColorFunction(face, direction);
                 return;
             }
         };
@@ -40,7 +40,7 @@ function Cube(props) {
         } else if (CCMOVEMENTS.includes(move)) {
             quarterMove(move, -1);
         } else if (ROTATIONS.includes(move)) {
-            ROTATION_EQUIV[move].split("").forEach((submove) => 
+            (ROTATION_EQUIV[move].split("")).forEach((submove) => 
                 singleMove(submove));
         }
     }
