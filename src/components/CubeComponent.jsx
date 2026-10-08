@@ -1,10 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { flushSync } from 'react-dom';
 import Piece from './PieceComponent';
 import { CUBE, MOVEMENTS, CCMOVEMENTS, CUBE_SLICE,
          ROTATIONS, ROTATION_EQUIV, ROT_AXIS} from '../shared/constants';
 
 
 function Cube(props) {
+
+    // number of slice animations currently running; new moves are ignored
+    // until this drops back to zero (a cube rotation runs three at once)
+    const activeAnimations = useRef(0);
 
     // Animates rotation of the face - clockwise if direction is 1
     // and counterclockwise if direction is -1
@@ -15,19 +20,26 @@ function Cube(props) {
         var toMoveList = CUBE_SLICE[face].map(cubieName => document.querySelector('#' + cubieName));
         // timing variable
         var timeCalled = Date.now();
+        activeAnimations.current++;
         // recursively called function to rotate cubies slowly 
         function rotateCubies() {
-            var elapsedTime = (Date.now() - timeCalled) / 4;
-            var newStyle = 'rotate' + ROT_AXIS[face][0] + '(' + dir * elapsedTime + 'deg)';
-            toMoveList.forEach(cubie => 
-                cubie.style.transform = cubie.style.transform.replace(/rotate.\(\S+\)/, newStyle));
-            if (elapsedTime <= 90) {
+            // clamp so the slice never goes past 90 degrees
+            var angle = Math.min((Date.now() - timeCalled) / 4, 90);
+            if (angle < 90) {
+                var newStyle = 'rotate' + ROT_AXIS[face][0] + '(' + dir * angle + 'deg)';
+                toMoveList.forEach(cubie => 
+                    cubie.style.transform = cubie.style.transform.replace(/rotate.\(\S+\)/, newStyle));
                 requestAnimationFrame(rotateCubies);
             } else {
+                // a slice at 90 degrees looks the same as the slice at 0 degrees
+                // with its colors moved, so swap to that state in this frame.
+                // commit the color change synchronously so it is painted in the
+                // same frame as the transform reset (otherwise React 18 batches it
+                // into a later task and the old colors flash for a frame)
+                flushSync(() => props.rotateColorFunction(face, direction));
                 toMoveList.forEach(cubie => 
-                    cubie.style.transform = cubie.style.transform.replace(/rotate.\(\S+\)/, 'rotateX(0deg)'));   
-                props.rotateColorFunction(face, direction);
-                return;
+                    cubie.style.transform = cubie.style.transform.replace(/rotate.\(\S+\)/, 'rotateX(0deg)'));
+                activeAnimations.current--;
             }
         };
         // initiate animation
@@ -47,7 +59,10 @@ function Cube(props) {
 
     function handleKeys(event) {
         console.log(`got key ${event.key}`);
-        singleMove(event.key);
+        // ignore keys while a move is still animating
+        if (activeAnimations.current === 0) {
+            singleMove(event.key);
+        }
         event.preventDefault();
     }
 
